@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Additional styling for the article page */
+    .article-header {
+      background: var(--header-bg);
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    .article-header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--primary-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    .back-btn:hover {
+      background: var(--secondary-color);
+    }
+    .article-content {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: var(--paper-bg);
+      border-radius: 4px;
+      box-shadow: 3px 3px 12px rgba(0,0,0,0.15);
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+    .article-content h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+    .article-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+      margin-bottom: 1rem;
+    }
+    .video-container {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .sources {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #ccc;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="article-header">
+    <h1 id="article-title">Subtopic Title</h1>
+    <!-- Back button now uses history.back() -->
+    <a href="#" class="back-btn" onclick="window.history.back(); return false;">Back</a>
+  </header>
+  <main class="article-content">
+    <div id="article-body">
+      [Placeholder] This is the article content.
+    </div>
+    <div class="video-container" id="video-container">
+      <iframe id="article-video" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="sources" id="sources">
+      <h3>Sources</h3>
+      <p id="source-text">[Placeholder source]</p>
+    </div>
+  </main>
+  <script>
+    // Mapping object for all subtopics (including newly added racial segregation entries)
+    const articles = {
+      // Cultural Norms
+      "gibson-girl-society": {
+        title: "Gibson Girl & Society",
+        articleText: `In the late 19th and early 20th centuries, the "Gibson Girl" emerged as an iconic representation of the ideal American woman. Created by illustrator Charles Dana Gibson, she was depicted as tall, slender, and elegant, often engaged in leisure activities. The Gibson Girl embodied a blend of traditional femininity and newfound independence. She was portrayed as educated and socially active, yet still adhering to societal expectations of modesty and decorum. This image influenced women's fashion, leading to high-necked blouses, long skirts, and upswept hairstyles. While the Gibson Girl symbolized a progressive shift towards women's autonomy, she also reinforced certain class and racial exclusivities, primarily representing affluent white women. Nonetheless, the Gibson Girl played a significant role in shaping early 20th-century perceptions of femininity and women's evolving roles in society.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/gibson-girl.jpg",
+        citation: `"The Gibson Girl as the 'New Woman'." Library of Congress. https://www.loc.gov/exhibits/gibson-girls-america/the-gibson-girl-as-the-new-woman.html`
+      },
+      "etiquette-modernity": {
+        title: "Etiquette and Modernity",
+        articleText: `Between 1865 and 1945, American society experienced significant transformations, leading to evolving standards of etiquette. The post-Civil War era emphasized Victorian ideals, where strict social codes dictated behavior, dress, and communication. As urbanization and industrialization progressed, these rigid norms began to relax. The 1920s introduced more liberal attitudes, with jazz music, dance halls, and flapper culture challenging traditional decorum. Technological advancements, such as the telephone and automobile, altered social interactions. Despite these changes, certain formalities persisted, especially in conservative communities. By 1945, etiquette had become a blend of old-world manners and modern informality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/intro-bg.jpg",
+        citation: `"The Power of Etiquette in 19th Century America." Adam Matthew Digital.`
+      },
+      "tradition-vs-innovation": {
+        title: "Tradition vs. Innovation",
+        articleText: `The period from 1865 to 1945 in America was marked by a tension between tradition and innovation. Post-Civil War reconstruction aimed to restore traditional Southern values, yet the nation was simultaneously embracing industrialization. The late 19th century saw inventions like the telephone, light bulb, and automobile revolutionize daily life. While some Americans clung to established customs, others eagerly adopted new technologies and lifestyles. The 1920s epitomized this clash: traditionalists upheld Prohibition and conservative morals, while innovators celebrated flapper culture, jazz music, and speakeasies. The Great Depression prompted a return to certain traditional values, emphasizing frugality and community support. However, World War II spurred further shifts, ultimately blending tradition with innovation.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/department-store.jpg",
+        citation: `"Tradition, Modernity, and the American Industrial Worker: Reflections and Critique." JSTOR.`
+      },
+      "cultural-shifts": {
+        title: "Cultural Shifts",
+        articleText: `Between 1865 and 1945, the United States underwent profound cultural shifts. The abolition of slavery and Reconstruction redefined social structures, while the influx of immigrants enriched the nation's cultural mosaic. The Harlem Renaissance celebrated African American art, music, and literature, and women's roles evolved significantly. The Great Depression spurred governmental reforms. Collectively, these changes laid the foundation for a more inclusive and dynamic society.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/flapper.jpg",
+        citation: `"The Harlem Renaissance." National Museum of African American History and Culture.`
+      },
+      // Popular Culture
+      "rise-of-flappers": {
+        title: "The Rise of Flappers",
+        articleText: `In the 1920s, the "flapper" emerged as a symbol of youthful rebellion and modernity. Flappers defied traditional norms with bold fashion, short bobbed hair, and a carefree attitude. They frequented jazz clubs and dance halls, challenging conventional ideas of femininity and paving the way for future feminist movements.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/flapper.jpg",
+        citation: `"Flappers." Encyclopedia of the Jazz Age, edited by James Ciment, Routledge, 2015.`
+      },
+      "mass-media-emerges": {
+        title: "Mass Media Emerges",
+        articleText: `Between 1865 and 1945, mass media revolutionized communication in America. The rise of newspapers, radio, and film united the nation through shared experiences while reshaping public opinion and cultural norms.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/radio-family.jpg",
+        citation: `"Mass Media and the Transformation of American Society, 1865–1945." ABC-CLIO.`
+      },
+      "jazz-roaring-twenties": {
+        title: "Jazz & The Roaring Twenties",
+        articleText: `The Roaring Twenties were defined by economic prosperity and cultural dynamism, with jazz music at their heart. Originating in African American communities, jazz spread nationwide and transformed dance, fashion, and social life—symbolizing freedom and creative expression.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/jazz.jpg",
+        citation: `"Jazz." Oxford University Press.`
+      },
+      "hollywood-beginnings": {
+        title: "Hollywood Beginnings",
+        articleText: `Hollywood emerged as the center of American cinema in the early 20th century. With Southern California's ideal climate and diverse landscapes, filmmakers established studios that produced silent and later sound films—setting industry standards during Hollywood’s Golden Age.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/hollywood.jpg",
+        citation: `"Hollywood Beginnings." Film History Journal.`
+      },
+      // Consumerism
+      "dept-stores-advertising": {
+        title: "Department Stores & Advertising",
+        articleText: `In the late 19th and early 20th centuries, department stores transformed retail by offering a vast range of goods under one roof. Iconic establishments like Macy's and Marshall Field's employed innovative advertising—elaborate window displays and mass-circulated catalogs—that redefined the shopping experience and helped spark consumer culture.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/department-store.jpg",
+        citation: `"The Rise of Department Stores." ABC-CLIO.`
+      },
+      "new-middle-class": {
+        title: "The New Middle Class",
+        articleText: `Industrialization and urbanization between 1865 and 1945 gave rise to a new middle class in America. Professionals, managers, and white-collar workers enjoyed increased income and homeownership. Their values of education, self-improvement, and respectability played a crucial role in shaping modern culture and consumer trends.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/intro-bg.jpg",
+        citation: `"The Rise of the Middle Class." Library of Congress.`
+      },
+      "mass-production-consumption": {
+        title: "Mass Production & Consumption",
+        articleText: `Mass production techniques, epitomized by Henry Ford’s assembly line, drastically reduced manufacturing costs. This made consumer goods more affordable and spurred a cultural shift toward mass consumption—laying the foundation for modern consumer culture.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/radio-family.jpg",
+        citation: `"Mass Production and Its Impact." Library of Congress.`
+      },
+      "consumer-identity": {
+        title: "Consumer Identity",
+        articleText: `As consumerism grew, Americans increasingly defined themselves by their purchasing choices. Advertising and brand loyalty helped forge a modern consumer identity in which personal worth and social status became closely tied to material possessions.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/department-store.jpg",
+        citation: `"The Development of Consumer Culture." American Memory, Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers addressed issues from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes, such as the Haymarket Riot and the Pullman Strike, highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and provide social reform. Initiatives like the CCC, PWA, and Social Security Act reduced unemployment, spurred economic growth, and supported millions of Americans during a time of crisis.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century saw landmark legislation that protected workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and restrictions on child labor, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a significant working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—prompting the rise of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates amassed vast fortunes, many workers and farmers lived in poverty—highlighting the widening economic gap and spurring debates on inequality and reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Gender & Women's Rights
+      "suffrage-movement": {
+        title: "Suffrage Movement",
+        articleText: `Following the Civil War, women's rights advocates intensified efforts to secure the right to vote. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association. Later, various suffrage organizations merged to form the National American Woman Suffrage Association, ultimately leading to the passage of the 19th Amendment in 1920—a monumental milestone for gender equality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/suffrage.jpg",
+        citation: `"Women's Suffrage in the Progressive Era." Library of Congress.`
+      },
+      "changing-gender-roles": {
+        title: "Changing Gender Roles",
+        articleText: `Between 1865 and 1945, American society saw significant shifts in gender roles. The "Cult of Domesticity" gave way to the "New Woman" of the Progressive Era, and World War II further accelerated these changes as women entered industries in unprecedented numbers—reshaping traditional expectations.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/changing-gender.jpg",
+        citation: `"Women's Rights Timeline." National Archives.`
+      },
+      "modern-girl-phenomenon": {
+        title: "Modern Girl Phenomenon",
+        articleText: `In the 1920s, the "Modern Girl" emerged as a cultural icon symbolizing female independence and modernity. With bobbed hair, shorter skirts, and a carefree attitude, these women defied traditional norms by frequenting jazz clubs, driving cars, and embracing a lifestyle of freedom and innovation.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/modern-girl.jpg",
+        citation: `"Women's History Milestones: A Timeline." (Source to be updated)`
+      },
+      "women-in-workforce": {
+        title: "Women in the Workforce",
+        articleText: `From the Progressive Era through World War II, American women increasingly entered the workforce. Initially concentrated in teaching, nursing, and social work, their roles expanded dramatically during World War II—epitomized by the iconic "Rosie the Riveter"—challenging traditional gender roles and paving the way for lasting change.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/rosie.jpg",
+        citation: `"Women's History." National Archives.`
+      },
+      // Immigration & Urbanization
+      "the-great-wave-of-immigration": {
+        title: "The Great Wave of Immigration",
+        articleText: `Between 1865 and 1918, the United States experienced an unprecedented influx of immigrants—often called the "Great Wave." Millions of newcomers, primarily from Europe, arrived seeking economic opportunity and refuge, fundamentally reshaping America's demographic and economic landscape.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/immigrants.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "urban-growth-tenements": {
+        title: "Urban Growth & Tenements",
+        articleText: `Rapid industrial expansion led to the explosive growth of American cities, resulting in overcrowded tenements. These harsh living conditions, while challenging, fostered vibrant immigrant communities that eventually spurred urban reforms and improvements in public health and housing.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/tenements.jpg",
+        citation: `"City Life in the Late 19th Century." Library of Congress.`
+      },
+      "ellis-island-experience": {
+        title: "Ellis Island Experience",
+        articleText: `Opened in 1892, Ellis Island served as the primary entry point for millions of immigrants. New arrivals underwent rigorous medical and legal inspections—symbolizing both the hope of a new beginning and the challenges of the immigrant experience in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/ellis-island.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "changing-demographics": {
+        title: "Changing Demographics",
+        articleText: `Between 1865 and 1945, immigration dramatically transformed America's demographic makeup. Immigrants from Southern and Eastern Europe diversified urban centers and sparked debates over assimilation and multiculturalism—laying the groundwork for the nation’s modern multicultural identity.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/demographics.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a substantial working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—spurring the growth of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates accumulated vast fortunes, many workers and farmers faced poverty—highlighting the widening economic gap and sparking debates on inequality and reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers addressed issues from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes, such as the Haymarket Riot and the Pullman Strike, highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and promote social reform. Initiatives like the CCC, PWA, and Social Security Act reduced unemployment and provided essential support to millions of Americans.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century brought landmark legislation to protect workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and restrictions on child labor, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Gender & Women's Rights
+      "suffrage-movement": {
+        title: "Suffrage Movement",
+        articleText: `Following the Civil War, women's rights advocates intensified efforts to secure the right to vote. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association. Later, various suffrage organizations merged to form the National American Woman Suffrage Association, ultimately leading to the passage of the 19th Amendment in 1920—a monumental milestone for gender equality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/suffrage.jpg",
+        citation: `"Women's Suffrage in the Progressive Era." Library of Congress.`
+      },
+      "changing-gender-roles": {
+        title: "Changing Gender Roles",
+        articleText: `Between 1865 and 1945, American society saw significant shifts in gender roles. The "Cult of Domesticity" gave way to the "New Woman" of the Progressive Era, and World War II further accelerated changes as women entered industries—reshaping traditional expectations.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/changing-gender.jpg",
+        citation: `"Women's Rights Timeline." National Archives.`
+      },
+      "modern-girl-phenomenon": {
+        title: "Modern Girl Phenomenon",
+        articleText: `In the 1920s, the "Modern Girl" emerged as a cultural icon symbolizing female independence and modernity. With bobbed hair, shorter skirts, and a carefree attitude, these women defied traditional norms by embracing freedom, frequenting jazz clubs, and driving cars—paving the way for future advances in women's rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/modern-girl.jpg",
+        citation: `"Women's History Milestones: A Timeline." (Source to be updated)`
+      },
+      "women-in-workforce": {
+        title: "Women in the Workforce",
+        articleText: `From the Progressive Era through World War II, American women increasingly joined the workforce. Initially concentrated in roles like teaching and nursing, their participation expanded dramatically during World War II—epitomized by "Rosie the Riveter"—challenging traditional gender roles and paving the way for lasting change.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/rosie.jpg",
+        citation: `"Women's History." National Archives.`
+      },
+      // Immigration & Urbanization
+      "the-great-wave-of-immigration": {
+        title: "The Great Wave of Immigration",
+        articleText: `Between 1865 and 1918, the United States experienced an unprecedented influx of immigrants—often called the "Great Wave." Millions of newcomers, primarily from Europe, arrived seeking economic opportunity and refuge, fundamentally reshaping America's demographic and economic landscape.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/immigrants.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "urban-growth-tenements": {
+        title: "Urban Growth & Tenements",
+        articleText: `Rapid industrial expansion led to the explosive growth of American cities, resulting in overcrowded tenements. Although conditions were harsh, these neighborhoods fostered vibrant immigrant communities that later spurred reforms in housing and public health.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/tenements.jpg",
+        citation: `"City Life in the Late 19th Century." Library of Congress.`
+      },
+      "ellis-island-experience": {
+        title: "Ellis Island Experience",
+        articleText: `Opened in 1892, Ellis Island served as the primary entry point for millions of immigrants. New arrivals underwent rigorous medical and legal inspections—symbolizing both the hope of a new beginning and the challenges of the immigrant experience in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/ellis-island.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "changing-demographics": {
+        title: "Changing Demographics",
+        articleText: `Between 1865 and 1945, immigration dramatically transformed America's demographic makeup. Immigrants from Southern and Eastern Europe diversified urban centers and sparked debates over assimilation and multiculturalism—laying the groundwork for the nation’s modern multicultural identity.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/demographics.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a substantial working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—spurring the growth of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates accumulated vast fortunes, many workers and farmers faced poverty—highlighting the widening economic gap and sparking debates on inequality and reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers tackled issues from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes—such as the Haymarket Riot and the Pullman Strike—highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and promote social reform. Initiatives such as the CCC, PWA, and Social Security Act reduced unemployment and provided essential support to millions of Americans.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century brought landmark legislation to protect workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and restrictions on child labor, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Gender & Women's Rights
+      "suffrage-movement": {
+        title: "Suffrage Movement",
+        articleText: `Following the Civil War, women's rights advocates intensified efforts to secure the right to vote. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association. Later, various suffrage organizations merged to form the National American Woman Suffrage Association, ultimately leading to the passage of the 19th Amendment in 1920—a monumental milestone for gender equality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/suffrage.jpg",
+        citation: `"Women's Suffrage in the Progressive Era." Library of Congress.`
+      },
+      "changing-gender-roles": {
+        title: "Changing Gender Roles",
+        articleText: `Between 1865 and 1945, American society saw significant shifts in gender roles. The "Cult of Domesticity" gave way to the "New Woman" of the Progressive Era, and World War II further accelerated changes as women entered industries—reshaping traditional expectations.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/changing-gender.jpg",
+        citation: `"Women's Rights Timeline." National Archives.`
+      },
+      "modern-girl-phenomenon": {
+        title: "Modern Girl Phenomenon",
+        articleText: `In the 1920s, the "Modern Girl" emerged as a cultural icon symbolizing female independence and modernity. With bobbed hair, shorter skirts, and a carefree attitude, these women defied traditional norms by embracing a lifestyle of freedom and innovation.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/modern-girl.jpg",
+        citation: `"Women's History Milestones: A Timeline." (Source to be updated)`
+      },
+      "women-in-workforce": {
+        title: "Women in the Workforce",
+        articleText: `From the Progressive Era through World War II, American women increasingly entered the workforce. Initially concentrated in teaching, nursing, and social work, their roles expanded dramatically during World War II—epitomized by the iconic "Rosie the Riveter"—challenging traditional gender roles and paving the way for lasting change.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/rosie.jpg",
+        citation: `"Women's History." National Archives.`
+      },
+      // Immigration & Urbanization
+      "the-great-wave-of-immigration": {
+        title: "The Great Wave of Immigration",
+        articleText: `Between 1865 and 1918, the United States experienced an unprecedented influx of immigrants—often called the "Great Wave." Millions of newcomers, primarily from Europe, arrived seeking economic opportunity and refuge, fundamentally reshaping America's demographic and economic landscape.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/immigrants.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "urban-growth-tenements": {
+        title: "Urban Growth & Tenements",
+        articleText: `Rapid industrial expansion led to the explosive growth of American cities, resulting in overcrowded tenements. Although conditions were harsh, these neighborhoods fostered vibrant immigrant communities that eventually spurred urban reforms and improvements in public health and housing.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/tenements.jpg",
+        citation: `"City Life in the Late 19th Century." Library of Congress.`
+      },
+      "ellis-island-experience": {
+        title: "Ellis Island Experience",
+        articleText: `Opened in 1892, Ellis Island served as the primary entry point for millions of immigrants. New arrivals underwent rigorous medical and legal inspections—symbolizing both the hope of a new beginning and the challenges of the immigrant experience in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/ellis-island.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "changing-demographics": {
+        title: "Changing Demographics",
+        articleText: `Between 1865 and 1945, immigration dramatically transformed America's demographic makeup. Immigrants from Southern and Eastern Europe diversified urban centers and sparked debates over assimilation and multiculturalism—laying the groundwork for the nation’s modern multicultural identity.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/demographics.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a significant working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—spurring the growth of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates accumulated vast fortunes, many workers and farmers faced poverty—highlighting the widening economic gap and sparking debates on inequality and reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers addressed issues from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes, such as the Haymarket Riot and the Pullman Strike, highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and promote social reform. Initiatives such as the CCC, PWA, and Social Security Act reduced unemployment and provided essential support to millions of Americans.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century brought landmark legislation to protect workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and child labor restrictions, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Gender & Women's Rights
+      "suffrage-movement": {
+        title: "Suffrage Movement",
+        articleText: `Following the Civil War, women's rights advocates intensified efforts to secure the right to vote. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association. Later, various suffrage organizations merged to form the National American Woman Suffrage Association, ultimately leading to the passage of the 19th Amendment in 1920—a monumental milestone for gender equality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/suffrage.jpg",
+        citation: `"Women's Suffrage in the Progressive Era." Library of Congress.`
+      },
+      "changing-gender-roles": {
+        title: "Changing Gender Roles",
+        articleText: `Between 1865 and 1945, American society saw significant shifts in gender roles. The "Cult of Domesticity" gave way to the "New Woman" of the Progressive Era, and World War II further accelerated changes as women entered industries—reshaping traditional expectations.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/changing-gender.jpg",
+        citation: `"Women's Rights Timeline." National Archives.`
+      },
+      "modern-girl-phenomenon": {
+        title: "Modern Girl Phenomenon",
+        articleText: `In the 1920s, the "Modern Girl" emerged as a cultural icon symbolizing female independence and modernity. With bobbed hair, shorter skirts, and a carefree attitude, these women defied traditional norms by embracing a lifestyle of freedom and innovation.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/modern-girl.jpg",
+        citation: `"Women's History Milestones: A Timeline." (Source to be updated)`
+      },
+      "women-in-workforce": {
+        title: "Women in the Workforce",
+        articleText: `From the Progressive Era through World War II, American women increasingly joined the workforce. Initially concentrated in teaching, nursing, and social work, their roles expanded dramatically during World War II—epitomized by the iconic "Rosie the Riveter"—challenging traditional gender roles and paving the way for lasting change.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/rosie.jpg",
+        citation: `"Women's History." National Archives.`
+      },
+      // Immigration & Urbanization
+      "the-great-wave-of-immigration": {
+        title: "The Great Wave of Immigration",
+        articleText: `Between 1865 and 1918, the United States experienced an unprecedented influx of immigrants—often called the "Great Wave." Millions of newcomers, primarily from Europe, arrived seeking economic opportunity and refuge, fundamentally reshaping America's demographic and economic landscape.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/immigrants.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "urban-growth-tenements": {
+        title: "Urban Growth & Tenements",
+        articleText: `Rapid industrial expansion led to the explosive growth of American cities, resulting in overcrowded tenements. Although conditions were harsh, these neighborhoods fostered vibrant immigrant communities that later spurred reforms in housing and public health.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/tenements.jpg",
+        citation: `"City Life in the Late 19th Century." Library of Congress.`
+      },
+      "ellis-island-experience": {
+        title: "Ellis Island Experience",
+        articleText: `Opened in 1892, Ellis Island served as the primary entry point for millions of immigrants. New arrivals underwent rigorous medical and legal inspections—symbolizing both the hope of a new beginning and the challenges of the immigrant experience in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/ellis-island.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "changing-demographics": {
+        title: "Changing Demographics",
+        articleText: `Between 1865 and 1945, immigration dramatically transformed America's demographic makeup. Immigrants from Southern and Eastern Europe diversified urban centers and sparked debates over assimilation and multiculturalism—laying the groundwork for the nation’s modern multicultural identity.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/demographics.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a substantial working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—spurring the growth of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates amassed vast fortunes, many workers and farmers lived in poverty—highlighting the widening economic gap and sparking debates on inequality and reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers tackled issues from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes, such as the Haymarket Riot and the Pullman Strike, highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and promote social reform. Initiatives such as the CCC, PWA, and Social Security Act reduced unemployment and provided essential support to millions of Americans.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century brought landmark legislation to protect workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and restrictions on child labor, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Gender & Women's Rights
+      "suffrage-movement": {
+        title: "Suffrage Movement",
+        articleText: `Following the Civil War, women's rights advocates intensified efforts to secure the right to vote. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association. Later, various suffrage organizations merged to form the National American Woman Suffrage Association, ultimately leading to the passage of the 19th Amendment in 1920—a monumental milestone for gender equality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/suffrage.jpg",
+        citation: `"Women's Suffrage in the Progressive Era." Library of Congress.`
+      },
+      "changing-gender-roles": {
+        title: "Changing Gender Roles",
+        articleText: `Between 1865 and 1945, American society saw significant shifts in gender roles. The "Cult of Domesticity" gave way to the "New Woman" of the Progressive Era, and World War II further accelerated changes as women entered industries—reshaping traditional expectations.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/changing-gender.jpg",
+        citation: `"Women's Rights Timeline." National Archives.`
+      },
+      "modern-girl-phenomenon": {
+        title: "Modern Girl Phenomenon",
+        articleText: `In the 1920s, the "Modern Girl" emerged as a cultural icon symbolizing female independence and modernity. With bobbed hair, shorter skirts, and a carefree attitude, these women defied traditional norms by embracing a lifestyle of freedom and innovation.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/modern-girl.jpg",
+        citation: `"Women's History Milestones: A Timeline." (Source to be updated)`
+      },
+      "women-in-workforce": {
+        title: "Women in the Workforce",
+        articleText: `From the Progressive Era through World War II, American women increasingly joined the workforce. Initially concentrated in roles such as teaching, nursing, and social work, their participation expanded dramatically during World War II—epitomized by the iconic "Rosie the Riveter"—challenging traditional gender roles and paving the way for lasting change.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/rosie.jpg",
+        citation: `"Women's History." National Archives.`
+      },
+      // Immigration & Urbanization
+      "the-great-wave-of-immigration": {
+        title: "The Great Wave of Immigration",
+        articleText: `Between 1865 and 1918, the United States experienced an unprecedented influx of immigrants—often called the "Great Wave." Millions of newcomers, primarily from Europe, arrived seeking economic opportunity and refuge, fundamentally reshaping America's demographic and economic landscape.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/immigrants.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "urban-growth-tenements": {
+        title: "Urban Growth & Tenements",
+        articleText: `Rapid industrial expansion led to the explosive growth of American cities, resulting in overcrowded tenements. Although conditions were harsh, these neighborhoods fostered vibrant immigrant communities that later spurred reforms in housing and public health.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/tenements.jpg",
+        citation: `"City Life in the Late 19th Century." Library of Congress.`
+      },
+      "ellis-island-experience": {
+        title: "Ellis Island Experience",
+        articleText: `Opened in 1892, Ellis Island served as the primary entry point for millions of immigrants. New arrivals underwent rigorous medical and legal inspections—symbolizing both the hope of a new beginning and the challenges of the immigrant experience in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/ellis-island.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "changing-demographics": {
+        title: "Changing Demographics",
+        articleText: `Between 1865 and 1945, immigration dramatically transformed America's demographic makeup. Immigrants from Southern and Eastern Europe diversified urban centers and sparked debates over assimilation and multiculturalism—laying the groundwork for the nation’s modern multicultural identity.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/demographics.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a substantial working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—spurring the growth of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates accumulated vast fortunes, many workers and farmers lived in poverty—highlighting the widening economic gap and sparking debates on inequality and reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers tackled issues from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes—such as the Haymarket Riot and the Pullman Strike—highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and promote social reform. Initiatives such as the CCC, PWA, and Social Security Act reduced unemployment and provided essential support to millions of Americans.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century brought landmark legislation to protect workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and restrictions on child labor, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Gender & Women's Rights
+      "suffrage-movement": {
+        title: "Suffrage Movement",
+        articleText: `Following the Civil War, women's rights advocates intensified efforts to secure the right to vote. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association. Later, various suffrage organizations merged to form the National American Woman Suffrage Association, ultimately leading to the passage of the 19th Amendment in 1920—a monumental milestone for gender equality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/suffrage.jpg",
+        citation: `"Women's Suffrage in the Progressive Era." Library of Congress.`
+      },
+      "changing-gender-roles": {
+        title: "Changing Gender Roles",
+        articleText: `Between 1865 and 1945, American society saw significant shifts in gender roles. The "Cult of Domesticity" gave way to the "New Woman" of the Progressive Era, and World War II further accelerated changes as women entered industries—reshaping traditional expectations.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/changing-gender.jpg",
+        citation: `"Women's Rights Timeline." National Archives.`
+      },
+      "modern-girl-phenomenon": {
+        title: "Modern Girl Phenomenon",
+        articleText: `In the 1920s, the "Modern Girl" emerged as a cultural icon symbolizing female independence and modernity. With bobbed hair, shorter skirts, and a carefree attitude, these women defied traditional norms by embracing a lifestyle of freedom and innovation.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/modern-girl.jpg",
+        citation: `"Women's History Milestones: A Timeline." (Source to be updated)`
+      },
+      "women-in-workforce": {
+        title: "Women in the Workforce",
+        articleText: `From the Progressive Era through World War II, American women increasingly joined the workforce. Initially concentrated in roles such as teaching, nursing, and social work, their participation expanded dramatically during World War II—epitomized by the iconic "Rosie the Riveter"—challenging traditional gender roles and paving the way for lasting change.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/rosie.jpg",
+        citation: `"Women's History." National Archives.`
+      },
+      // Immigration & Urbanization
+      "the-great-wave-of-immigration": {
+        title: "The Great Wave of Immigration",
+        articleText: `Between 1865 and 1918, the United States experienced an unprecedented influx of immigrants—often called the "Great Wave." Millions of newcomers, primarily from Europe, arrived seeking economic opportunity and refuge, fundamentally reshaping America's demographic and economic landscape.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/immigrants.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "urban-growth-tenements": {
+        title: "Urban Growth & Tenements",
+        articleText: `Rapid industrial expansion led to the explosive growth of American cities, resulting in overcrowded tenements. Although conditions were harsh, these neighborhoods fostered vibrant immigrant communities that later spurred urban reforms and improvements in public health and housing.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/tenements.jpg",
+        citation: `"City Life in the Late 19th Century." Library of Congress.`
+      },
+      "ellis-island-experience": {
+        title: "Ellis Island Experience",
+        articleText: `Opened in 1892, Ellis Island served as the primary entry point for millions of immigrants. New arrivals underwent rigorous medical and legal inspections—symbolizing both the hope of a new beginning and the challenges of the immigrant experience in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/ellis-island.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "changing-demographics": {
+        title: "Changing Demographics",
+        articleText: `Between 1865 and 1945, immigration dramatically transformed America's demographic makeup. Immigrants from Southern and Eastern Europe diversified urban centers and sparked debates over assimilation and multiculturalism—laying the groundwork for the nation’s modern multicultural identity.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/demographics.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a substantial working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—spurring the growth of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates amassed vast fortunes, many workers and farmers lived in poverty—highlighting the widening economic gap and sparking debates on inequality and the need for reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers tackled issues from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes, such as the Haymarket Riot and the Pullman Strike, highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and promote social reform. Initiatives such as the CCC, PWA, and Social Security Act reduced unemployment and provided essential support to millions of Americans.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century brought landmark legislation to protect workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and restrictions on child labor, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Gender & Women's Rights
+      "suffrage-movement": {
+        title: "Suffrage Movement",
+        articleText: `Following the Civil War, women's rights advocates intensified efforts to secure the right to vote. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association. Later, various suffrage organizations merged to form the National American Woman Suffrage Association, ultimately leading to the passage of the 19th Amendment in 1920—a monumental milestone for gender equality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/suffrage.jpg",
+        citation: `"Women's Suffrage in the Progressive Era." Library of Congress.`
+      },
+      "changing-gender-roles": {
+        title: "Changing Gender Roles",
+        articleText: `Between 1865 and 1945, American society saw significant shifts in gender roles. The "Cult of Domesticity" gave way to the "New Woman" of the Progressive Era, and World War II further accelerated changes as women entered industries—reshaping traditional expectations.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/changing-gender.jpg",
+        citation: `"Women's Rights Timeline." National Archives.`
+      },
+      "modern-girl-phenomenon": {
+        title: "Modern Girl Phenomenon",
+        articleText: `In the 1920s, the "Modern Girl" emerged as a cultural icon symbolizing female independence and modernity. With bobbed hair, shorter skirts, and a carefree attitude, these women defied traditional norms by embracing a lifestyle of freedom and innovation.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/modern-girl.jpg",
+        citation: `"Women's History Milestones: A Timeline." (Source to be updated)`
+      },
+      "women-in-workforce": {
+        title: "Women in the Workforce",
+        articleText: `From the Progressive Era through World War II, American women increasingly joined the workforce. Initially concentrated in teaching, nursing, and social work, their roles expanded dramatically during World War II—epitomized by the iconic "Rosie the Riveter"—challenging traditional gender roles and paving the way for lasting change.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/rosie.jpg",
+        citation: `"Women's History." National Archives.`
+      },
+      // Immigration & Urbanization
+      "the-great-wave-of-immigration": {
+        title: "The Great Wave of Immigration",
+        articleText: `Between 1865 and 1918, the United States experienced an unprecedented influx of immigrants—often called the "Great Wave." Millions of newcomers, primarily from Europe, arrived seeking economic opportunity and refuge, fundamentally reshaping America's demographic and economic landscape.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/immigrants.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "urban-growth-tenements": {
+        title: "Urban Growth & Tenements",
+        articleText: `Rapid industrial expansion led to the explosive growth of American cities, resulting in overcrowded tenements. Although conditions were harsh, these neighborhoods fostered vibrant immigrant communities that later spurred reforms in housing and public health.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/tenements.jpg",
+        citation: `"City Life in the Late 19th Century." Library of Congress.`
+      },
+      "ellis-island-experience": {
+        title: "Ellis Island Experience",
+        articleText: `Opened in 1892, Ellis Island served as the primary entry point for millions of immigrants. New arrivals underwent rigorous medical and legal inspections—symbolizing both the hope of a new beginning and the challenges of the immigrant experience in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/ellis-island.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      "changing-demographics": {
+        title: "Changing Demographics",
+        articleText: `Between 1865 and 1945, immigration dramatically transformed America's demographic makeup. Immigrants from Southern and Eastern Europe diversified urban centers and sparked debates over assimilation and multiculturalism—laying the groundwork for the nation’s modern multicultural identity.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/demographics.jpg",
+        citation: `"Immigration to the United States, 1851-1900." Library of Congress.`
+      },
+      // Class Inequality
+      "rise-of-working-class": {
+        title: "The Rise of the Working Class",
+        articleText: `Between 1865 and 1945, industrialization led to the emergence of a substantial working class. Immigrants and rural migrants provided labor for factories, mines, and railroads while forming unions to demand fair wages and better conditions—pivotal forces in shaping American labor policies.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/working-class.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "industrialization-labor": {
+        title: "Industrialization and Labor",
+        articleText: `Rapid industrial growth revolutionized production methods in the late 19th and early 20th centuries, but often at the expense of workers who endured long hours, low wages, and unsafe conditions—spurring the growth of labor movements and strikes.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/factory.jpg",
+        citation: `"Period 6: 1865-1898." Gilder Lehrman Institute of American History.`
+      },
+      "wealth-disparities": {
+        title: "Wealth Disparities",
+        articleText: `The Gilded Age was characterized by rapid economic growth alongside stark wealth disparities. While industrial magnates accumulated vast fortunes, many workers and farmers lived in poverty—highlighting the widening economic gap and sparking debates on inequality and reform.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/wealth.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      "social-mobility": {
+        title: "Social Mobility",
+        articleText: `The promise of the "American Dream" suggested that hard work could lead to upward mobility. However, in an era of rapid industrialization, barriers such as limited education and discrimination often hindered progress—revealing the complex realities of social mobility in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/social-mobility.jpg",
+        citation: `"Overview | Rise of Industrial America, 1876-1900." Library of Congress.`
+      },
+      // Economic & Labor Reforms
+      "progressive-era-reforms": {
+        title: "Progressive Era Reforms",
+        articleText: `Between the 1890s and 1920s, the United States underwent significant reforms during the Progressive Era. Reformers tackled issues arising from rapid industrialization and political corruption by instituting antitrust laws, establishing the Federal Reserve System, and introducing income taxes to promote fair competition and economic stability.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/progressive-era.jpg",
+        citation: `"Progressive Era and Economics." Historical Society of Pennsylvania.`
+      },
+      "labor-unions-strikes": {
+        title: "Labor Unions & Strikes",
+        articleText: `The late 19th and early 20th centuries saw the rise of labor unions as workers united to demand better wages, hours, and conditions. Major strikes—such as the Haymarket Riot and the Pullman Strike—highlighted the conflict between labor and management and spurred reforms to improve workers' rights.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/labor-strike.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      "new-deal-recovery": {
+        title: "The New Deal & Recovery",
+        articleText: `In response to the Great Depression, President Franklin D. Roosevelt implemented the New Deal (1933–1939)—a suite of programs designed to stimulate economic recovery and promote social reform. Initiatives such as the CCC, PWA, and Social Security Act reduced unemployment and provided essential support to millions of Americans.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/new-deal.jpg",
+        citation: `"A Brief History: The U.S. Department of Labor." U.S. Department of Labor.`
+      },
+      "workers-rights-legislation": {
+        title: "Workers' Rights Legislation",
+        articleText: `The early 20th century brought landmark legislation to protect workers. The Fair Labor Standards Act established a federal minimum wage, overtime pay, and child labor restrictions, while the Wagner Act secured the right to unionize and bargain collectively—laying the foundation for modern labor rights in America.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/workers-rights.jpg",
+        citation: `"The Progressive Era." Library of Congress.`
+      },
+      // Racial Segregation & Discrimination (new)
+      "jim-crow-laws": {
+        title: "Jim Crow Laws",
+        articleText: `Following the end of Reconstruction in 1877, Southern states enacted Jim Crow laws to enforce racial segregation and disenfranchise African Americans. These laws mandated separate public facilities—such as schools, transportation, restrooms, and restaurants—under the guise of "separate but equal." In practice, the facilities for Black Americans were vastly inferior, and additional barriers such as literacy tests and poll taxes suppressed Black political participation. This legal framework relegated African Americans to second-class citizenship and perpetuated systemic inequality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/jim-crow.jpg",
+        citation: `"A Century of Racial Segregation 1849–1950." Library of Congress.`
+      },
+      "media-stereotypes": {
+        title: "Media Stereotypes",
+        articleText: `During the late 19th and early 20th centuries, media played a significant role in perpetuating negative stereotypes of African Americans. Minstrel shows—featuring white performers in blackface—portrayed caricatured, derogatory images that reinforced racist ideologies and justified discriminatory practices. These representations deeply influenced public perceptions and policies, entrenching harmful racial biases.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/media-stereotypes.jpg",
+        citation: `"A Century of Racial Segregation 1849–1950." Library of Congress.`
+      },
+      "segregated-education": {
+        title: "Segregated Education",
+        articleText: `In the post-Reconstruction era, Southern states implemented laws requiring separate schools for white and Black students. Although the doctrine of "separate but equal" was supposed to apply, in reality, schools for African American children were underfunded, overcrowded, and lacked adequate resources—severely limiting their opportunities and reinforcing systemic inequality.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/segregated-education.jpg",
+        citation: `"Reconstruction and Repression, 1865-1900." National Park Service.`
+      },
+      "civil-rights-precursors": {
+        title: "Civil Rights Precursors",
+        articleText: `Despite pervasive discrimination, African Americans organized to challenge segregation and inequality. In 1909, activists founded the NAACP to combat racial injustice through legal challenges and public advocacy. Early efforts included challenging discriminatory laws and practices, laying the groundwork for the larger civil rights movement that emerged in the mid-20th century.`,
+        videoEmbed: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        image: "assets/images/civil-rights.jpg",
+        citation: `"A Century of Racial Segregation 1849–1950." Library of Congress.`
+      }
+    };
+
+    // Retrieve the 'subtopic' query parameter from the URL
+    const params = new URLSearchParams(window.location.search);
+    const subtopicKey = params.get('subtopic');
+
+    if (subtopicKey && articles[subtopicKey]) {
+      const article = articles[subtopicKey];
+      document.getElementById('article-title').textContent = article.title;
+      document.getElementById('article-body').innerHTML = `<p>${article.articleText}</p>`;
+      if (article.videoEmbed) {
+        document.getElementById('article-video').src = article.videoEmbed;
+        document.getElementById('video-container').style.display = "block";
+      } else {
+        document.getElementById('video-container').style.display = "none";
+      }
+      document.getElementById('source-text').textContent = article.citation;
+    } else {
+      document.getElementById('article-title').textContent = "Article Not Found";
+      document.getElementById('article-body').innerHTML = "<p>Sorry, no article content is available for this subtopic.</p>";
+      document.getElementById('video-container').style.display = "none";
+      document.getElementById('source-text').textContent = "";
+    }
+  </script>
+</body>
+</html>

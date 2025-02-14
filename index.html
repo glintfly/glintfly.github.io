@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Changes &amp; Continuities (1865–1945)</title>
+  <!-- Vintage Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Progress Bar -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Intro Landing Page -->
+  <section id="intro">
+    <div class="intro-overlay"></div>
+    <div class="intro-content">
+      <h1>Social Changes &amp; Continuities</h1>
+      <p>(1865–1945)</p>
+      <button id="enter-btn">Enter</button>
+    </div>
+  </section>
+
+  <!-- Top Navigation Bar -->
+  <nav id="top-nav" class="top-nav">
+    <ul>
+      <li data-target="cultural" class="active">Cultural Norms</li>
+      <li data-target="popular">Popular Culture</li>
+      <li data-target="consumer">Consumerism</li>
+      <li data-target="emancipation">Emancipation &amp; AA Rights</li>
+      <li data-target="segregation">Racial Segregation</li>
+      <li data-target="immigration">Immigration &amp; Urbanization</li>
+      <li data-target="gender">Gender &amp; Women's Rights</li>
+      <li data-target="class">Class Inequality</li>
+      <li data-target="labor">Economic &amp; Labor Reforms</li>
+    </ul>
+  </nav>
+
+  <!-- Main Interface (hidden until "Enter" is clicked) -->
+  <div id="main-interface" class="hidden">
+    <div class="main-container">
+      <main id="content">
+        <!-- Section: Cultural Norms -->
+        <section id="cultural" class="content-section active-section">
+          <h2>Cultural Norms</h2>
+          <p class="news-card-summary">
+            Explore the evolution of American cultural norms from 1865 to 1945, highlighting shifts in gender roles, societal expectations, and the balance between tradition and innovation.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=gibson-girl-society">
+                <h3>Gibson Girl &amp; Society</h3>
+                <p>Discover how the Gibson Girl became a symbol of the ideal American woman, blending traditional femininity with emerging independence.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=etiquette-modernity">
+                <h3>Etiquette and Modernity</h3>
+                <p>Explore how American etiquette evolved from strict Victorian norms to a blend of tradition and modern informality.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=tradition-vs-innovation">
+                <h3>Tradition vs. Innovation</h3>
+                <p>Delve into America’s balancing act between preserving tradition and embracing new technologies and ideas.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=cultural-shifts">
+                <h3>Cultural Shifts</h3>
+                <p>Examine profound cultural transformations from Reconstruction through World War II.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Popular Culture -->
+        <section id="popular" class="content-section hidden">
+          <h2>Popular Culture</h2>
+          <p class="news-card-summary">
+            Discover the emergence of American popular culture between 1865 and 1945, focusing on the rise of flappers, mass media, jazz, and the beginnings of Hollywood.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=rise-of-flappers">
+                <h3>The Rise of Flappers</h3>
+                <p>Discover how flappers challenged societal norms, redefining femininity and influencing future cultural movements.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=mass-media-emerges">
+                <h3>Mass Media Emerges</h3>
+                <p>Explore how newspapers, radio, and film transformed communication and culture in America.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=jazz-roaring-twenties">
+                <h3>Jazz &amp; The Roaring Twenties</h3>
+                <p>Learn how jazz defined the Roaring Twenties and reshaped American social norms.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=hollywood-beginnings">
+                <h3>Hollywood Beginnings</h3>
+                <p>Trace the origins of Hollywood and its rise as the heart of American cinema.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Consumerism -->
+        <section id="consumer" class="content-section hidden">
+          <h2>Consumerism</h2>
+          <p class="news-card-summary">
+            Examine the rise of consumerism in America from 1865 to 1945, focusing on department stores, the new middle class, mass production, and the development of consumer identity.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=dept-stores-advertising">
+                <h3>Department Stores &amp; Advertising</h3>
+                <p>Discover how department stores and innovative advertising transformed American shopping habits.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=new-middle-class">
+                <h3>The New Middle Class</h3>
+                <p>Explore the rise of America's new middle class and its impact on society and culture.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=mass-production-consumption">
+                <h3>Mass Production &amp; Consumption</h3>
+                <p>Learn how mass production revolutionized manufacturing and spurred mass consumption.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=consumer-identity">
+                <h3>Consumer Identity</h3>
+                <p>Examine how consumerism influenced American identity and social status through purchasing choices.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Emancipation & African American Rights -->
+        <section id="emancipation" class="content-section hidden">
+          <h2>Emancipation &amp; African American Rights</h2>
+          <p class="news-card-summary">
+            Trace the journey of African American rights from the Emancipation Proclamation through Reconstruction to the cultural renaissance of the early 20th century.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=emancipation-proclamation-impact">
+                <h3>Emancipation Proclamation &amp; Impact</h3>
+                <p>Learn how the Emancipation Proclamation redefined the Civil War and set the stage for the abolition of slavery.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=reconstruction-freedmens-bureau">
+                <h3>Reconstruction &amp; Freedmen's Bureau</h3>
+                <p>Explore the role of the Freedmen's Bureau during Reconstruction and its impact on newly freed African Americans.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=struggle-for-voting-rights">
+                <h3>The Struggle for Voting Rights</h3>
+                <p>Discover the challenges and milestones in the African American fight for voting rights.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=black-cultural-renaissance">
+                <h3>Black Cultural Renaissance</h3>
+                <p>Explore the Harlem Renaissance and its profound impact on African American culture and identity.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Racial Segregation & Discrimination -->
+        <section id="segregation" class="content-section hidden">
+          <h2>Racial Segregation &amp; Discrimination</h2>
+          <p class="news-card-summary">
+            Explore the history of racial segregation and discrimination in the United States from 1865 to 1945, focusing on Jim Crow laws, media stereotypes, segregated education, and early civil rights movements.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=jim-crow-laws">
+                <h3>Jim Crow Laws</h3>
+                <p>Learn how Jim Crow laws institutionalized segregation through "separate but equal" practices that were anything but equal.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=media-stereotypes">
+                <h3>Media Stereotypes</h3>
+                <p>Discover how early media representations reinforced harmful stereotypes of African Americans.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=segregated-education">
+                <h3>Segregated Education</h3>
+                <p>Examine how segregated schooling under "separate but equal" conditions deprived Black students of quality education.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=civil-rights-precursors">
+                <h3>Civil Rights Precursors</h3>
+                <p>Learn about the early activists and organizations that laid the groundwork for the later civil rights movements.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Immigration & Urbanization -->
+        <section id="immigration" class="content-section hidden">
+          <h2>Immigration &amp; Urbanization</h2>
+          <p class="news-card-summary">
+            Explore the transformative effects of immigration and urbanization in the United States between 1865 and 1945, focusing on the Great Wave of Immigration, urban growth and tenements, the Ellis Island experience, and changing demographics.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=the-great-wave-of-immigration">
+                <h3>The Great Wave of Immigration</h3>
+                <p>Discover how the influx of immigrants reshaped America's demographic and economic landscape.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=urban-growth-tenements">
+                <h3>Urban Growth &amp; Tenements</h3>
+                <p>Explore the rapid urbanization and the challenging living conditions in crowded tenement districts.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=ellis-island-experience">
+                <h3>Ellis Island Experience</h3>
+                <p>Learn about Ellis Island’s pivotal role as the gateway for millions of immigrants.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=changing-demographics">
+                <h3>Changing Demographics</h3>
+                <p>Examine how immigration transformed America's ethnic and cultural landscape.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Gender & Women's Rights -->
+        <section id="gender" class="content-section hidden">
+          <h2>Gender &amp; Women's Rights</h2>
+          <p class="news-card-summary">
+            Explore the evolution of women's roles and rights in America from 1865 to 1945, highlighting the suffrage movement, changing gender roles, the "Modern Girl" phenomenon, and women's increasing participation in the workforce.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=suffrage-movement">
+                <h3>Suffrage Movement</h3>
+                <p>Discover how determined advocacy led to the passage of the 19th Amendment, granting American women the right to vote in 1920.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=changing-gender-roles">
+                <h3>Changing Gender Roles</h3>
+                <p>Explore how women's roles evolved from domestic spheres to active participation in education, politics, and the workforce.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=modern-girl-phenomenon">
+                <h3>Modern Girl Phenomenon</h3>
+                <p>Learn about the 1920s "Modern Girl" who defied tradition and embodied a new era of female independence.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=women-in-workforce">
+                <h3>Women in the Workforce</h3>
+                <p>Discover how World War II catalyzed women's entry into various industries, reshaping gender roles in the workplace.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Class Inequality -->
+        <section id="class" class="content-section hidden">
+          <h2>Class Inequality</h2>
+          <p class="news-card-summary">
+            Examine the evolution of class inequality in the United States from 1865 to 1945, focusing on the rise of the working class, the impacts of industrialization, wealth disparities, and social mobility.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=rise-of-working-class">
+                <h3>The Rise of the Working Class</h3>
+                <p>Discover how industrialization led to the emergence of a robust working class and the formation of labor unions.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=industrialization-labor">
+                <h3>Industrialization and Labor</h3>
+                <p>Explore how technological advancements transformed labor practices and spurred workers to organize.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=wealth-disparities">
+                <h3>Wealth Disparities</h3>
+                <p>Learn about the stark income gap of the Gilded Age and its lasting impact on American society.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=social-mobility">
+                <h3>Social Mobility</h3>
+                <p>Examine the challenges and opportunities of upward mobility in an industrializing nation.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section: Economic & Labor Reforms -->
+        <section id="labor" class="content-section hidden">
+          <h2>Economic &amp; Labor Reforms</h2>
+          <p class="news-card-summary">
+            Explore the significant economic and labor reforms in the United States between 1865 and 1945, focusing on Progressive Era initiatives, labor unions and strikes, the New Deal’s recovery programs, and workers' rights legislation.
+          </p>
+          <div class="news-cards">
+            <div class="news-card">
+              <a href="article.html?subtopic=progressive-era-reforms">
+                <h3>Progressive Era Reforms</h3>
+                <p>Discover how Progressive Era initiatives tackled monopolies and political corruption to stabilize the economy.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=labor-unions-strikes">
+                <h3>Labor Unions &amp; Strikes</h3>
+                <p>Explore the rise of labor unions and major strikes that reshaped workers' rights in early 20th-century America.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=new-deal-recovery">
+                <h3>The New Deal &amp; Recovery</h3>
+                <p>Learn how New Deal programs revived the economy and provided critical support during the Great Depression.</p>
+              </a>
+            </div>
+            <div class="news-card">
+              <a href="article.html?subtopic=workers-rights-legislation">
+                <h3>Workers' Rights Legislation</h3>
+                <p>Examine landmark laws that established minimum wage, overtime pay, and protections for workers.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
